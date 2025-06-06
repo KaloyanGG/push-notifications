@@ -22,13 +22,13 @@
   ],
   "screenshots": [
     {
-      "src": "/babyBig.png",
+      "src": "./babyBig.png",
       "sizes": "402x402",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "/babyBig.png",
+      "src": "./babyBig.png",
       "sizes": "402x402",
       "type": "image/png"
     }
