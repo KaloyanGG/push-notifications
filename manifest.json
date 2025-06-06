@@ -1,0 +1,31 @@
+{
+  "name": "My App",
+  "short_name": "Koko App",
+  "start_url": ".",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/baby.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/babyBig.png",
+      "sizes": "402x402",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/babyBig.png",
+      "sizes": "402x402",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/babyBig.png",
+      "sizes": "402x402",
+      "type": "image/png"
+    }
+  ]
+}
