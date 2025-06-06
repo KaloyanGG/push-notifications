@@ -13,6 +13,11 @@
       "src": "/babyBig.png",
       "sizes": "402x402",
       "type": "image/png"
+    },
+    {
+      "src": "/bird512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "screenshots": [
