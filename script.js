@@ -8,7 +8,7 @@
 
 function addBaby() {
   const img = document.createElement("img"); // Create a new image element
-  img.src = "./baby.jpg"; // Set the source of the image
+  img.src = "./baby.png"; // Set the source of the image
   // img.src =
   //   "https://t4.ftcdn.net/jpg/05/81/65/43/360_F_581654303_9gSWVgImKfm3ob47mUIfLRXYAeHr0YfU.jpg";
   img.alt = "Baby"; // Add an alt attribute for accessibility
@@ -20,4 +20,16 @@ async function callServer() {
   const json = await res.json();
   console.log(json);
   return json;
+}
+
+async function requestNotificationPermission() {
+  Notification.requestPermission();
+  console.log(promise);
+}
+
+function createNotification() {
+  new Notification("hi", {
+    body: "hifds",
+    icon: "./bird512.png",
+  });
 }

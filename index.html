@@ -10,7 +10,6 @@
       let deferredPrompt;
 
       window.addEventListener("beforeinstallprompt", (e) => {
-        alert(12);
         e.preventDefault(); // Prevent automatic prompt
         deferredPrompt = e; // Save the event for later
 
@@ -54,6 +53,11 @@
     <button onclick="addBaby()">Add baby</button>
     <button onclick="callServer()">Call server</button>
     <button id="install-btn">Install App</button>
+    <button onclick="requestNotificationPermission()">
+      Request Notification permission
+    </button>
+    <button onclick="createNotification()">Create notification</button>
+
     <!-- <img src="/baby.jpg" alt="no baby :/" /> -->
   </body>
 </html>
