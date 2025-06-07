@@ -22,35 +22,17 @@
 //   return json;
 // }
 
-// async function requestNotificationPermission() {
-//   console.log(12);
-//   Notification.requestPermission().then((res) => {
-//     new Notification("🔥 Reminder", {
-//       body: "Time to check your todos!",
-//     });
-//     console.log(res);
-//   });
-// }
-
-// function createNotification() {
-//   console.log(13);
-//   const a = new Notification("hi", {
-//     body: "hifds",
-//     tag: "tag",
-//   });
-// }
-
-const createNotificationBtn = document.querySelector("#createNotificationBtn");
-createNotificationBtn.addEventListener("click", () => {
-  Notification.requestPermission().then((perm) => {
-    if (perm === "granted") {
-      new Notification("Example notification", {
-        body: "This is more text",
-      });
-    } else {
-      console.log("problemoo...");
-    }
+async function requestNotificationPermission() {
+  Notification.requestPermission().then((res) => {
+    new Notification("🔥 Reminder", {
+      body: "Time to check your todos!",
+    });
+    console.log(res);
   });
-});
+}
 
-console.log(createNotificationBtn);
+function createNotification() {
+  new Notification("hi", {
+    body: "hifds",
+  });
+}

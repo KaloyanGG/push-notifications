@@ -1,3 +1,5 @@
 1. To have a installable PWA, the manifest is enough.
 2. To have a install prompt (IOS not supported), you need "beforeinstallprompt" event on the window and prevent its default, save the "event" and call its .prompt() method. (possible to also include screenshots in the manifest for the install prompt)
 3. Service worker is for functionalities of the PWA.
+4. For notification you first need to request permission, then you can create one with new Notification().
+5. Notification API works only for HTTPS or localhost. (live server opened from phone is not supported)
