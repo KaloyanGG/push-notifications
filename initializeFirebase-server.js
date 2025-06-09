@@ -6,38 +6,44 @@ const firebaseConfig = {
   messagingSenderId: "68796731125",
   appId: "1:68796731125:web:1f9bf0f9388c90e184ffbc",
 };
-
-const app = firebase.initializeApp(firebaseConfig);
-console.log(app);
-const messaging = firebase.messaging();
-console.log(messaging);
-
 const vapidKey =
   "BH-L88go1voQqShVNwYs7sVV87AJ17nlUq2QIgRGkcPbyKoPAudPpkbzU8msFxX0WQ3xPyxI7DdB74Cm55XCuKc";
 
-function logMsg() {
-  console.log(messaging);
-}
+let app;
+let messaging;
 
-messaging
-  .getToken({ vapidKey: vapidKey })
-  .then((token) => {
-    if (token) {
-      console.log("🎱 Token retrieved successfully");
-      console.log(token);
-      const sth = document.createElement("div");
-      sth.innerText = token;
-      document.body.appendChild(sth);
-    } else {
-      requestPermission();
-      console.log(
-        "No registration token available. Request permission to generate one."
-      );
+async function requestNotificationPermission() {
+  Notification.requestPermission().then((res) => {
+    if (res === "denied" || res === "default") {
+      alert("Notification access denied or default");
+      return;
     }
-  })
-  .catch((err) => {
-    console.log("Error occured while retrieving token. ", err);
+
+    app = firebase.initializeApp(firebaseConfig);
+    messaging = firebase.messaging();
+
+    messaging
+      .getToken({ vapidKey: vapidKey })
+      .then((token) => {
+        if (token) {
+          console.log("🎱 Token retrieved successfully");
+          console.log(token);
+          const sth = document.createElement("div");
+          sth.innerText = token;
+          document.body.appendChild(sth);
+        } else {
+          requestPermission();
+          console.log(
+            "No registration token available. Request permission to generate one."
+          );
+        }
+      })
+      .catch((err) => {
+        console.log("Error occured while retrieving token. ", err);
+      });
   });
+}
+// requestNotificationPermission();
 
 function requestPermission() {
   console.log("Requesting permission...");

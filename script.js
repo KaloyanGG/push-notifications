@@ -39,17 +39,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
   });
 });
 
-async function requestNotificationPermission() {
-  Notification.requestPermission().then((res) => {
-    new Notification("🔥 Reminder", {
-      body: "Notification access granted damn!",
-    });
-    // console.log(res);
-  });
-}
-
-requestNotificationPermission();
-
 function createNotification() {
   const n = new Notification("hi", {
     body: new Date().toTimeString(),
