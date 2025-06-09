@@ -22,17 +22,44 @@
 //   return json;
 // }
 
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault(); // Prevent automatic prompt
+  deferredPrompt = e; // Save the event for later
+
+  // Show your install button now, e.g. enable a button:
+  const btn = document.getElementById("install-btn");
+  btn.style.display = "block";
+  btn.addEventListener("click", async () => {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log("User choice:", outcome);
+    deferredPrompt = null;
+  });
+});
+
 async function requestNotificationPermission() {
   Notification.requestPermission().then((res) => {
     new Notification("🔥 Reminder", {
-      body: "Time to check your todos!",
+      body: "Notification access granted damn!",
     });
-    console.log(res);
+    // console.log(res);
   });
 }
 
+requestNotificationPermission();
+
 function createNotification() {
-  new Notification("hi", {
-    body: "hifds",
+  const n = new Notification("hi", {
+    body: new Date().toTimeString(),
+    icon: "bird512.png",
   });
+  n.addEventListener("error", (e) => {
+    console.error(e);
+  });
+}
+
+function createNotificationFromServiceWorker() {
+  navigator.serviceWorker.controller.postMessage("Posted message");
 }

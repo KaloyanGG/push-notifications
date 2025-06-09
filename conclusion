@@ -3,3 +3,7 @@
 3. Service worker is for functionalities of the PWA.
 4. For notification you first need to request permission, then you can create one with new Notification().
 5. Notification API works only for HTTPS or localhost. (live server opened from phone is not supported)
+6. Careful with tags, they can block some new notifications
+7. For Service worker:
+  - "Message" event is triggered by "postMessage" from the main thread.
+  - "Push" comes from a push server like Firebase cloud messaging, cannot be triggered from the app.
