@@ -12,18 +12,20 @@ const vapidKey =
 let app;
 let messaging;
 
+app = firebase.initializeApp(firebaseConfig);
+messaging = firebase.messaging();
+
 async function requestNotificationPermission() {
-  Notification.requestPermission().then((res) => {
+  Notification.requestPermission().then(async (res) => {
     if (res === "denied" || res === "default") {
-      alert("Notification access denied or default");
+      alert("Notification access is " + res);
       return;
     }
 
-    app = firebase.initializeApp(firebaseConfig);
-    messaging = firebase.messaging();
-
     messaging
-      .getToken({ vapidKey: vapidKey })
+      .getToken({
+        vapidKey: vapidKey,
+      })
       .then((token) => {
         if (token) {
           console.log("🎱 Token retrieved successfully");
