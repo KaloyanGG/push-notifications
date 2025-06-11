@@ -13,45 +13,36 @@ let app;
 let messaging;
 
 app = firebase.initializeApp(firebaseConfig);
-messaging = firebase.messaging();
+messaging = firebase.messaging(app);
 
 async function requestNotificationPermission() {
-  Notification.requestPermission().then(async (res) => {
-    if (res === "denied" || res === "default") {
-      alert("Notification access is " + res);
-      return;
-    }
+  const res = await Notification.requestPermission();
+  if (res === "denied" || res === "default") {
+    alert("Notification access is " + res);
+    return;
+  }
 
-    messaging
-      .getToken({
-        vapidKey: vapidKey,
-      })
-      .then((token) => {
-        if (token) {
-          console.log("🎱 Token retrieved successfully");
-          console.log(token);
-          const sth = document.createElement("div");
-          sth.innerText = token;
-          document.body.appendChild(sth);
-        } else {
-          requestPermission();
-          console.log(
-            "No registration token available. Request permission to generate one."
-          );
-        }
-      })
-      .catch((err) => {
-        console.log("Error occured while retrieving token. ", err);
-      });
-  });
-}
-// requestNotificationPermission();
+  console.log("SW Registration:");
+  console.log(await navigator.serviceWorker.getRegistrations());
 
-function requestPermission() {
-  console.log("Requesting permission...");
-  Notification.requestPermission().then((permission) => {
-    if (permission === "granted") {
-      console.log("Notification permission granted.");
+  try {
+    const token = await messaging.getToken({
+      vapidKey: vapidKey,
+    });
+    if (token) {
+      console.log("🎱 Token retrieved successfully");
+      console.log(token);
+      const sth = document.createElement("p");
+      sth.textContent = token;
+      document.body.appendChild(sth);
+    } else {
+      requestPermission();
+      console.log(
+        "No registration token available. Request permission to generate one."
+      );
     }
-  });
+  } catch (error) {
+    console.log("Error occured while retrieving token. ");
+    console.error(error);
+  }
 }
