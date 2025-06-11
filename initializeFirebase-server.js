@@ -15,6 +15,8 @@ let messaging;
 app = firebase.initializeApp(firebaseConfig);
 messaging = firebase.messaging(app);
 
+// TODO again not working when hosted
+
 async function requestNotificationPermission() {
   const res = await Notification.requestPermission();
   if (res === "denied" || res === "default") {

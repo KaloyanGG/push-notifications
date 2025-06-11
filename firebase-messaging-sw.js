@@ -33,21 +33,24 @@ messaging.onBackgroundMessage((payload) => {
     icon: "./baby.png",
   };
 
-  return self.registration.showNotification(
+  return sw.registration.showNotification(
     notificationTitle,
     notificationOptions
   );
 });
 
+sw.addEventListener("activate", () => {});
+sw.addEventListener("install", () => {});
+
 // Handle notification clicks - open the app
-self.addEventListener("notificationclick", (event) => {
+sw.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
   event.waitUntil(clients.openWindow("/"));
 });
 
 // Handle push events directly (if not using Firebase messaging)
-// self.addEventListener("push", (event) => {
+// sw.addEventListener("push", (event) => {
 //   if (event.data) {
 //     console.log("Push event data:", event.data.text());
 
@@ -57,6 +60,6 @@ self.addEventListener("notificationclick", (event) => {
 //       icon: "./baby.png",
 //     };
 
-//     event.waitUntil(self.registration.showNotification(data.title, options));
+//     event.waitUntil(sw.registration.showNotification(data.title, options));
 //   }
 // });
