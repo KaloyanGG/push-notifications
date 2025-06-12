@@ -14,10 +14,10 @@ const vapidKey =
 let app;
 let messaging;
 
+console.log("-- script imported");
+
 app = firebase.initializeApp(firebaseConfig);
 messaging = firebase.messaging(app);
-
-// TODO again not working when hosted
 
 async function requestNotificationPermission() {
   const res = await Notification.requestPermission();
@@ -29,7 +29,7 @@ async function requestNotificationPermission() {
   let reg;
   try {
     reg = await navigator.serviceWorker.register("firebase-messaging-sw.js", {
-      scope: "/push-notifications/",
+      scope: "/",
     });
   } catch (e) {
     console.error(e);
@@ -41,7 +41,7 @@ async function requestNotificationPermission() {
   try {
     const token = await messaging.getToken({
       vapidKey: vapidKey,
-      serviceWorkerRegistration: reg,
+      // serviceWorkerRegistration: reg,
     });
     if (token) {
       console.log("🎱 Token retrieved successfully");
