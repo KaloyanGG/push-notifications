@@ -41,6 +41,7 @@ async function requestNotificationPermission() {
   try {
     const token = await messaging.getToken({
       vapidKey: vapidKey,
+      serviceWorkerRegistration: reg,
     });
     if (token) {
       console.log("🎱 Token retrieved successfully");
