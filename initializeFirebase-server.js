@@ -9,6 +9,8 @@ const firebaseConfig = {
 const vapidKey =
   "BH-L88go1voQqShVNwYs7sVV87AJ17nlUq2QIgRGkcPbyKoPAudPpkbzU8msFxX0WQ3xPyxI7DdB74Cm55XCuKc";
 
+// TODO fb version
+// check credentials
 let app;
 let messaging;
 
@@ -24,12 +26,14 @@ async function requestNotificationPermission() {
     return;
   }
 
-  // let reg;
-  // try {
-  //   reg = await navigator.serviceWorker.register("./firebase-messaging-sw.js");
-  // } catch (e) {
-  //   console.error(e);
-  // }
+  let reg;
+  try {
+    reg = await navigator.serviceWorker.register("firebase-messaging-sw.js", {
+      scope: "/",
+    });
+  } catch (e) {
+    console.error(e);
+  }
   // console.log("SW Registration:");
   // console.log(await navigator.serviceWorker.getRegistrations());
 
@@ -37,7 +41,6 @@ async function requestNotificationPermission() {
   try {
     const token = await messaging.getToken({
       vapidKey: vapidKey,
-      // serviceWorkerRegistration: reg,
     });
     if (token) {
       console.log("🎱 Token retrieved successfully");
