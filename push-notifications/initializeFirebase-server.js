@@ -31,7 +31,7 @@ async function requestNotificationPermission() {
     reg = await navigator.serviceWorker.register(
       "/push-notifications/firebase-messaging-sw.js",
       {
-        scope: "/",
+        scope: ".",
       }
     );
   } catch (e) {
