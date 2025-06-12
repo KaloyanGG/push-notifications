@@ -19,6 +19,9 @@ console.log("-- script imported");
 app = firebase.initializeApp(firebaseConfig);
 messaging = firebase.messaging(app);
 
+console.log(app);
+console.log(messaging);
+
 async function requestNotificationPermission() {
   const res = await Notification.requestPermission();
   if (res === "denied" || res === "default") {
@@ -28,12 +31,9 @@ async function requestNotificationPermission() {
 
   let reg;
   try {
-    reg = await navigator.serviceWorker.register(
-      "/push-notifications/firebase-messaging-sw.js",
-      {
-        scope: ".",
-      }
-    );
+    reg = await navigator.serviceWorker.register("firebase-messaging-sw.js", {
+      scope: "/",
+    });
   } catch (e) {
     console.log("---- Error registering our SW");
     console.error(e);
@@ -45,7 +45,7 @@ async function requestNotificationPermission() {
   try {
     const token = await messaging.getToken({
       vapidKey: vapidKey,
-      serviceWorkerRegistration: reg,
+      // serviceWorkerRegistration: reg,
     });
     if (token) {
       console.log("🎱 Token retrieved successfully");
