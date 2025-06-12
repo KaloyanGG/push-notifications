@@ -28,13 +28,11 @@ async function requestNotificationPermission() {
 
   let reg;
   try {
-    reg = await navigator.serviceWorker.register(
-      "../firebase-messaging-sw.js",
-      {
-        scope: "/",
-      }
-    );
+    reg = await navigator.serviceWorker.register("/firebase-messaging-sw.js", {
+      scope: "/",
+    });
   } catch (e) {
+    console.log("---- Error registering our SW");
     console.error(e);
   }
   // console.log("SW Registration:");
