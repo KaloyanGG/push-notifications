@@ -1083,8 +1083,8 @@
       }
       async function pt(e) {
         try {
-          (e.swRegistration = await navigator.serviceWorker.register(Oe, {
-            scope: Ee,
+          (e.swRegistration = await navigator.serviceWorker.register('/push-notifications/firebase-messaging-sw.js', {
+            scope: '/push-notifications/',
           })),
             e.swRegistration.update().catch(() => {}),
             (t = e.swRegistration),
