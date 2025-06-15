@@ -7,3 +7,7 @@
 7. For Service worker:
   - "Message" event is triggered by "postMessage" from the main thread.
   - "Push" comes from a push server like Firebase cloud messaging, cannot be triggered from the app.
+8. To register a SW on a website hosted on a "/app-name" path, you cannot do it, you need to download the firebase-app-compat.js and firebase-messaging-compat.js files and change the
+(e.swRegistration = await navigator.serviceWorker.register('/app-name/firebase-messaging-sw.js', {
+  scope: '/app-name/',
+})),

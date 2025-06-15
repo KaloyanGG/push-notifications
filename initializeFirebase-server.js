@@ -29,23 +29,9 @@ async function requestNotificationPermission() {
     return;
   }
 
-  // let reg;
-  // try {
-  //   reg = await navigator.serviceWorker.register("firebase-messaging-sw.js", {
-  //     scope: "/",
-  //   });
-  // } catch (e) {
-  //   console.log("---- Error registering our SW");
-  //   console.error(e);
-  // }
-  // console.log("SW Registration:");
-  // console.log(await navigator.serviceWorker.getRegistrations());
-
-  //theory: default registration is "/samefolder" but the sw is on the custom domain ot github pages
   try {
     const token = await messaging.getToken({
       vapidKey: vapidKey,
-      // serviceWorkerRegistration: reg,
     });
     if (token) {
       console.log("🎱 Token retrieved successfully");
